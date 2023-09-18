@@ -1,7 +1,7 @@
 # Visión por Computador - Curso 2023/2024
 Repositorio usado para subir el trabajo realizado en las sesiones prácticas de la asignatura **Visión por Computador**. 
 
-El objetivo principal es, llevar a cabo un seguimiento o *tracking* de todas aquellas actividades prácticas que se realicen a lo largo del curso.
+El objetivo principal es llevar a cabo un seguimiento o *tracking* de todas aquellas actividades prácticas que se realicen a lo largo del curso.
 
 La estructura básica será la siguiente:
 
