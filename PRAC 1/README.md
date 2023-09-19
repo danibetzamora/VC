@@ -42,3 +42,39 @@ La primera de ellas, es una pequeña muestra de las diferentes formas que pueden
 
 Sin embargo, en la segunda imagen se decidió llevar a cabo un diseño **Mondrian** como en la tarea anterior, pero esta vez haciendo uso de las funciones básicas de dibujo de **OpenCV** (líneas y cuadrados). Es por ello que para la creación de la segunda imagen se fueron incluyendo a mano las diferentes formas, en las coordenadas necesarias, para obtener el resultado que se muestra al final de la tarea.
 
+### Tarea 4
+
+**Enlace a la tarea**: [Tarea 4](Tarea%204.ipynb).
+
+Para este caso, se propone llevar a cabo ciertas modificaciones en un plano de la imagen. Recordemos que las imágenes a color están formadas por tres planos, por lo que se deberá realizar algún tipo de modificación en alguno de los tres para que se produzca algún efecto visual que modifique la imagen original.
+
+En nuestro caso, hemos decidido aplicar ciertas modificaciones a los tres planos de una imagen que es cargada directamente desde el disco duro. La modificación en cuestión ha sido invertir los valores de cada uno de los planos, lo cual se consigue realizando la siguiente operación matemática: 
+
+```python
+# Inversión de color del plano rojo
+plano_rojo = 255 - img_rgb[:,:,2]
+
+# Inversión de color del plano verde
+plano_verde = 255 - img_rgb[:,:,1]
+
+# Inversión de color del plano azul
+plano_azul = 255 - img_rgb[:,:,0]
+```
+
+De esta manera, se logra invertir el valor de cada uno de los planos. Por ejemplo, si el plano rojo tenía un valor de **255**, al hacer la operación `255 -255`, nos dará como resultado un **0**, es decir, el valor opuesto al valor actual del plano.
+
+Acto seguido, se hizo un *merge* de los tres planos, lo cual produce un efecto de colores invertidos en la imagen original. La línea en concreto que produce ese resultado es la siguiente:
+
+	inver_img = cv2.merge((plano_rojo,plano_verde,plano_azul))
+
+Como propuesta adicional a esta tarea, se ha decido aprovechar la estructura de *collage* que se muestra en el cuaderno de enunciado de la práctica. En esa estructura, se muestra cada uno de los planos (RGB) correspondientes a la entrada de la webcam. 
+
+El objetivo de esto es hacer modificaciones totalmente independientes a cada uno de los tres planos, de tal manera que se pueda ver en tiempo real (en cada una de las imágenes mostradas en el collage) la modificación que se le ha realizado a cada plano.
+
+Por ejemplo, para el plano **rojo** (primer recuadro), se ha propuesto realizar nuevamente una **inversión de colores**. En segundo lugar, para el plano **verde** (segundo recuadro), se ha propuesto un **aumento de brillo** (el cual se obtiene aumentando el valor actual de cada uno de los píxeles. Por último, para el plano **azul** (tercer recuadro) se ha decidido hacer uso de una función de **OpenCV**, la cual aplica un filtro de tipo *blur* que difumina la imagen de dicho plano.
+
+En caso de querer saber más sobre las modificaciones realizadas o la función `GaussianBlur` de **OpenCV**, dejamos el enlace a la explicación que hemos hecho en el propio cuaderno de la tarea 4:
+
+- [Explicación de las modificaciones de los planos](Tarea%204.ipynb#explicacion-modificaciones).
+
+
