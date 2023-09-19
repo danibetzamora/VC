@@ -50,7 +50,7 @@ Para este caso, se propone llevar a cabo ciertas modificaciones en un plano de l
 
 En nuestro caso, hemos decidido aplicar ciertas modificaciones a los tres planos de una imagen que es cargada directamente desde el disco duro. La modificación en cuestión ha sido invertir los valores de cada uno de los planos, lo cual se consigue realizando la siguiente operación matemática: 
 
-```python
+```
 # Inversión de color del plano rojo
 plano_rojo = 255 - img_rgb[:,:,2]
 
@@ -76,5 +76,58 @@ Por ejemplo, para el plano **rojo** (primer recuadro), se ha propuesto realizar 
 En caso de querer saber más sobre las modificaciones realizadas o la función `GaussianBlur` de **OpenCV**, dejamos el enlace a la explicación que hemos hecho en el propio cuaderno de la tarea 4:
 
 - [Explicación de las modificaciones de los planos](Tarea%204.ipynb#explicacion-modificaciones).
+
+### Tarea 5
+
+**Enlace a la tarea**: [Tarea 5](Tarea%205.ipynb).
+
+Nuevamente, para la quinta tarea se han propuesto dos posibles soluciones.
+
+En una de ellas, se carga una imagen desde el disco duro y, mediante dos bucles **_for_** se recorre toda la imagen buscando el píxel con mayor valor (más brillo) y el de menor valor (menos brillo). 
+
+Esto se ha logrado haciendo uso de dos variables que conforme se iba encontrando el píxel con más brillo y el píxel con menos brillo se iban actualizando, a la misma vez que se guardaban las coordenadas de dichos píxeles cada vez que las variables se actualizaban. Haciendo uso de las coordenadas, se podrá dibujar un círculo verde en la imagen para mostrar el píxel más claro y un círculo rojo para destacar el píxel más oscuro.
+
+Por otro lado, se ha querido realizar lo mismo pero con la entrada de la webcam en lugar de usar una imagen almacenada en disco. La idea es la misma, pero se ve todo en tiempo real, pudiendo ver en todo momento cuál es el píxel con más brillo y el píxel con menos brillo.
+
+### Tarea 6
+
+**Enlace a la tarea**: [Tarea 6](Tarea%206.ipynb).
+
+Para finalizar con la realización de la práctica, se han realizado tres **_pop arts_** diferentes. Todos ellos se enumeran a continuación.
+
+#### Pop Art 1 - Filtro de dibujo a lápiz
+
+En este primer *pop art* se ha utilizado una función de **OpenCV**, la cual permite aplicar un filtro de detección de bordes al *frame* capturado. Esto junto con los parámetros usados en dicha función, consigue que los valores del *frame* en escala de grises varíen entre negro y blanco, obteniendo de esta manera una imagen que parece haber sido dibujada con un lápiz.
+
+#### Pop Art 2 - Canal predominante
+
+En este caso, hemos modificado las imágenes que captura la videocámara provocando que los pixeles determinen su color al canal que mayor número tenga. Esto provocará que, por ejemplo, un pixel que tenga un color (120,58,225) se muestre como (0,0,255). 
+
+Esto se ha conseguido recorriendo el tamaño total del frame por pixeles y seleccionando, de la composición de colores de los píxeles, el canal de ese color con mayor valor:
+
+	pixel_color = frame_small[y, x]
+	dominant_channel = np.argmax(pixel_color)
+
+Posteriormente, se establecen los 2 canales restantes a 0, y se le asigna el valor máximo del canal restante al pixel en cuestión.
+
+	dominant_color = np.zeros(3, dtype=np.uint8)
+	dominant_color[dominant_channel] = pixel_color[dominant_channel]
+	dominant_colors[y, x] = dominant_color
+
+#### Pop Art 3 - Pixelado de la imagen
+
+Por último, hemos modificado las imágenes que captura la videocámara provocando que los pixeles se agrupen en pixeles mayores deformando la imagen con un estilo pixelado. 
+
+Esto se ha conseguido seleccionando el tamaño del conjunto de pixeles y estableciendo el tamaño de la ventana que reproducirá el video. Cuando hayamos seleccionado el bloque de pixeles debemos recorrerlos para determinar cual es el color medio de todos ellos:
+
+	block = frame_small[y:y+block_size, x:x+block_size]
+	block_mean_color = np.mean(np.mean(block, axis=0), axis=0)
+
+Posteriormente, se convierte ese color en un array de 8 bits que serán asignados al conjunto de ese bloque y se iteraran los siguientes pixeles saltándose el bloque anterior.
+
+	block_dominant_color = np.uint8(block_mean_color)
+	dominant_colors[y:y+block_size, x:x+block_size] = block_dominant_color
+
+
 
 
