@@ -35,7 +35,7 @@ Por otro lado, cada una de las tres imágenes obtenidas al aplicar el operador d
 
 Por último, mediante un bucle `for` se muestran las seis imágenes resultantes, pudiendo ver con claridad la diferencia entre ellas.
 
-Además, se muestra el contenido de una imagen escalada y de otra sin escalar en forma de matriz. Viendo con claridad como la imagen a la que se le aplicado el operador Sobel y no se le ha ajustado la escala presenta valores negativos. Mientras que en la otra, al haber sido escalada, los valores están entre el 0 y el 255, pudiendo ver una clara detección de bordes en escala de grises muy parecida a la obtenida con Canny (aunque no tan binaria).
+Además, se muestra el contenido de una imagen escalada y de otra sin escalar en forma de matriz. Viendo con claridad como la imagen a la que se le ha aplicado el operador Sobel y no se le ha ajustado la escala presenta valores negativos. Mientras que en la otra, al haber sido escalada, los valores están entre el 0 y el 255, pudiendo ver una clara detección de bordes en escala de grises muy parecida a la obtenida con Canny (aunque no tan binaria).
 
 ### Tarea 3
 
@@ -55,7 +55,7 @@ Por último, se pide realizar nuevamente el conteo de píxeles blancos por colum
 
 En la gráfica que muestra el conteo de píxeles blancos en las columnas se puede apreciar con claridad la simetría de la imagen, ya que la imagen original es totalmente simétrica, por lo que presenta el mismo número de píxeles blancos en ambas mitades de la imagen.
 
-Sin embargo, en el conteo por filas, se puede ver como las primeras filas presentan muy pocos píxeles blancos (dado que es el fondo), y en el resto de filas el número de píxeles va aumentando progresivamente.
+Sin embargo, en el conteo por filas, se puede ver como las primeras filas presentan muy pocos píxeles blancos (dado que es el fondo), y en el resto de filas el número de píxeles claros va aumentando progresivamente.
 
 Para finalizar, se muestra el valor máximo de píxeles blancos tanto para las filas como para las columnas y, además, se calcula el número de filas y de columnas que tienen un valor igual o mayor al 95% del máximo, remarcando, en cada caso, aquellas filas y columnas que cumplan esa condición mediante una línea roja.
 
@@ -65,6 +65,10 @@ La principal diferencia entre ambas técnicas, es que Sobel se utiliza para calc
 
 Por lo que se podría decir que Sobel resalta más los bordes verticales y horizontales en una imagen, y por lo tanto, proporciona más información sobre la dirección y la magnitud del gradiente en cada píxel. Mientras que Canny devuelve una imagen binaria que ofrece una detección de bordes más precisa y limpia en comparación con Sobel.
 
+### Tarea 4
+
+Escogeríamos las funciones vistas en el anterior trabajo ya que explican y muestran visualmente lo más básico para un mejor entendimiento de la materia y de las posibilidades que tiene. Concretamente, el ejercicio 5, el cual muestra en la webcam la zona más clara y la más oscura, aplicando sobre cada frame del vídeo dos variables las cuales sobre cada recorrido de cada fila de la imagen van actualizando sus valores y comparando con los sucesivos hasta dar con los más acentuados habiendo previamente cambiado la imagen a una escala de grises donde es más fácil hacer su calculo. Donde se localizan esas zonas, se dibujan dos círculos  de colores.
+
 ### Tarea 5
 
 **Enlace a la tarea**: [Tarea 5](Tarea%205.ipynb).
@@ -72,3 +76,5 @@ Por lo que se podría decir que Sobel resalta más los bordes verticales y horiz
 En la tarea 5, hemos desarrollado una aplicación que procesa la imagen proporcionada por la webcam para realizar un seguimiento de los ojos en tiempo real. Para lograrlo, hemos utilizado un detector de ojos basado en el clasificador en cascada de Haar proporcionado por OpenCV, que es una técnica de aprendizaje automático entrenada para reconocer patrones de ojos en imágenes. El modelo fue descargado directamente desde el repositorio oficial de OpenCV, y se puede visualizar en el siguiente enlace: [Haar Cascade Model](Resources/haarcascade_eye.xml).
 
 Esta aplicación puede ser muy útil en muchos casos. Por un lado, puede ser aplicada en sistemas de seguridad, como en la videovigilancia y el control de acceso, donde la detección de personas y el seguimiento de sus movimientos son fundamentales. Además, puede tener un impacto significativo en la interacción humano-ordenador, permitiendo que las personas controlen interfaces de usuario mediante la mirada, lo que es especialmente relevante en aplicaciones de tecnología y juegos. Además, el seguimiento ocular puede ser útil para detectar fatiga en conductores en sistemas avanzados de asistencia al conductor y para investigaciones en campos como la psicología y las ciencias del comportamiento.
+
+En esta tarea también hemos implementado una posible funcionalidad en la que gracias a la detección de los ojos hemos situado una banda negra, que en cada frame detectado por la webcam, sitúa según unas dimensiones determinadas por la posición de los ojos, unos puntos que posteriormente son utilizados para formar un rectángulo de color negro y así proteger la identidad del usuario.
