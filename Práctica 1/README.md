@@ -1,4 +1,4 @@
-## Práctica 1 VC - Curso 2023/2024
+# Práctica 1 VC - Curso 2023/2024
 
 En este fichero se llevará a cabo una breve explicación del trabajo que se ha realizado para cada una de las tareas solicitadas para la **práctica 1** de la asignatura **Visión por Computador**. 
 
@@ -8,7 +8,7 @@ Esto implica comentar brevemente como se han llevado a cabo cada una de las tare
 - **Jorge Vega Sánchez**
 - **Daniel Betancor Zamora**
 
-### Tarea 1
+## Tarea 1
 
 **Enlace a la tarea**: [Tarea 1](Tarea%201.ipynb).
 
@@ -22,7 +22,7 @@ Como la imagen es de *800 x 800*, se interpreta que hay 8 filas y 8 columnas, ya
 
 Por eso mismo, se recorrerá la imagen mediante dos bucles **_for_**. Para cada fila, se recorrerán las 8 columnas, y se decidirá si el cuadrado *100 x 100* es blanco o negro en base a si el número de la columna es *par* o *impar* y a una variable que cambia en cada ciclo. Esta variable varía entre 0 y 1 para indicar si en una determinada fila los cuadrados blancos estarán en posiciones pares o en posiciones impares.
 
-### Tarea 2
+## Tarea 2
 
 **Enlace a la tarea**: [Tarea 2](Tarea%202.ipynb).
 
@@ -30,7 +30,7 @@ Esta tarea es muy similar a la anterior, pero, en lugar de automatizar el proces
 
 Por eso mismo, en la resolución de la tarea puede observarse que para la creación de todas las formas que se visualizan, básicamente se han seleccionado las regiones de la imagen a modificar (a partir de los índices indicados en la matriz que representa la imagen), y se han indicado los valores decimales que tendrá cada canal (al ser una imagen a color dispone de 3 canales, RGB) para obtener un determinado color (blanco, negro, rojo, amarillo o azul).
 
-### Tarea 3
+## Tarea 3
 
 **Enlace a la tarea**: [Tarea 3](Tarea%203.ipynb).
 
@@ -42,7 +42,7 @@ La primera de ellas, es una pequeña muestra de las diferentes formas que pueden
 
 Sin embargo, en la segunda imagen se decidió llevar a cabo un diseño **Mondrian** como en la tarea anterior, pero esta vez haciendo uso de las funciones básicas de dibujo de **OpenCV** (líneas y cuadrados). Es por ello que para la creación de la segunda imagen se fueron incluyendo a mano las diferentes formas, en las coordenadas necesarias, para obtener el resultado que se muestra al final de la tarea.
 
-### Tarea 4
+## Tarea 4
 
 **Enlace a la tarea**: [Tarea 4](Tarea%204.ipynb).
 
@@ -77,7 +77,7 @@ En caso de querer saber más sobre las modificaciones realizadas o la función `
 
 - [Explicación de las modificaciones de los planos](Tarea%204.ipynb#explicacion-modificaciones).
 
-### Tarea 5
+## Tarea 5
 
 **Enlace a la tarea**: [Tarea 5](Tarea%205.ipynb).
 
@@ -89,17 +89,17 @@ Esto se ha logrado haciendo uso de dos variables que conforme se iba encontrando
 
 Por otro lado, se ha querido realizar lo mismo pero con la entrada de la webcam en lugar de usar una imagen almacenada en disco. La idea es la misma, pero se ve todo en tiempo real, pudiendo ver en todo momento cuál es el píxel con más brillo y el píxel con menos brillo.
 
-### Tarea 6
+## Tarea 6
 
 **Enlace a la tarea**: [Tarea 6](Tarea%206.ipynb).
 
 Para finalizar con la realización de la práctica, se han realizado tres **_pop arts_** diferentes. Todos ellos se enumeran a continuación.
 
-#### Pop Art 1 - Filtro de dibujo a lápiz
+### Pop Art 1 - Filtro de dibujo a lápiz
 
 En este primer *pop art* se ha utilizado una función de **OpenCV**, la cual permite aplicar un filtro de detección de bordes al *frame* capturado. Esto junto con los parámetros usados en dicha función, consigue que los valores del *frame* en escala de grises varíen entre negro y blanco, obteniendo de esta manera una imagen que parece haber sido dibujada con un lápiz.
 
-#### Pop Art 2 - Canal predominante
+### Pop Art 2 - Canal predominante
 
 En este caso, hemos modificado las imágenes que captura la videocámara provocando que los pixeles determinen su color al canal que mayor número tenga. Esto provocará que, por ejemplo, un pixel que tenga un color (120,58,225) se muestre como (0,0,255). 
 
@@ -114,7 +114,7 @@ Posteriormente, se establecen los 2 canales restantes a 0, y se le asigna el val
 	dominant_color[dominant_channel] = pixel_color[dominant_channel]
 	dominant_colors[y, x] = dominant_color
 
-#### Pop Art 3 - Pixelado de la imagen
+### Pop Art 3 - Pixelado de la imagen
 
 Por último, hemos modificado las imágenes que captura la videocámara provocando que los pixeles se agrupen en pixeles mayores deformando la imagen con un estilo pixelado. 
 

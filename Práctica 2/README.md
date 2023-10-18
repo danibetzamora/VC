@@ -1,4 +1,4 @@
-## Práctica 2 VC - Curso 2023/2024
+# Práctica 2 VC - Curso 2023/2024
 
 Fichero destinado a la explicación de las tareas realizadas durante la **práctica 2**. 
 
@@ -8,7 +8,7 @@ Entre ellas, se destaca la aplicación de *Canny* e interpretación del histogra
 - **Jorge Vega Sánchez**
 - **Daniel Betancor Zamora**
 
-### Tarea 1
+## Tarea 1
 
 **Enlace a la tarea**: [Tarea 1](Tarea%201.ipynb).
 
@@ -23,7 +23,7 @@ Por último, se pide para esta tarea, que se identifique cual es el valor máxim
 
 Para realizar dicha tarea, se ha hecho uso de funciones propias de **NumPy**, las cuales permiten obtener el valor máximo de una lista, la posición en la que se encuentra dicho valor máximo y contar el número de valores que superan el 95% del máximo de la lista.
 
-### Tarea 2
+## Tarea 2
 
 **Enlace a la tarea**: [Tarea 2](Tarea%202.ipynb).
 
@@ -37,7 +37,7 @@ Por último, mediante un bucle `for` se muestran las seis imágenes resultantes,
 
 Además, se muestra el contenido de una imagen escalada y de otra sin escalar en forma de matriz. Viendo con claridad como la imagen a la que se le ha aplicado el operador Sobel y no se le ha ajustado la escala presenta valores negativos. Mientras que en la otra, al haber sido escalada, los valores están entre el 0 y el 255, pudiendo ver una clara detección de bordes en escala de grises muy parecida a la obtenida con Canny (aunque no tan binaria).
 
-### Tarea 3
+## Tarea 3
 
 **Enlace a la tarea**: [Tarea 3](Tarea%203.ipynb).
 
@@ -65,11 +65,11 @@ La principal diferencia entre ambas técnicas, es que Sobel se utiliza para calc
 
 Por lo que se podría decir que Sobel resalta más los bordes verticales y horizontales en una imagen, y por lo tanto, proporciona más información sobre la dirección y la magnitud del gradiente en cada píxel. Mientras que Canny devuelve una imagen binaria que ofrece una detección de bordes más precisa y limpia en comparación con Sobel.
 
-### Tarea 4
+## Tarea 4
 
 Escogeríamos las funciones vistas en el anterior trabajo ya que explican y muestran visualmente lo más básico para un mejor entendimiento de la materia y de las posibilidades que tiene. Concretamente, el ejercicio 5, el cual muestra en la webcam la zona más clara y la más oscura, aplicando sobre cada frame del vídeo dos variables las cuales sobre cada recorrido de cada fila de la imagen van actualizando sus valores y comparando con los sucesivos hasta dar con los más acentuados habiendo previamente cambiado la imagen a una escala de grises donde es más fácil hacer su calculo. Donde se localizan esas zonas, se dibujan dos círculos  de colores.
 
-### Tarea 5
+## Tarea 5
 
 **Enlace a la tarea**: [Tarea 5](Tarea%205.ipynb).
 
