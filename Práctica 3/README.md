@@ -70,3 +70,65 @@ Además de mostrar el dinero total que aparece en la imagen, hemos querido mostr
 
 ![Dinero Total](README%20Images/tarea2-dinero.jpg)
 
+Por otra parte, tratamos de realizar el conteo de dinero presente en la imagen con monedas solapadas, lo cual supuso un gran problema por los siguientes motivos:
+
+- **Pérdida de información**: Cuando las monedas se solapan, partes de ellas están ocultas por otras monedas. Esto significa que no se pueden ver completamente y, por lo tanto, no es posible medir con precisión su diámetro.
+
+- **Ambigüedad**: La superposición de monedas crea ambigüedad en cuanto a cuántas monedas están involucradas y qué parte de cada moneda es visible.
+
+- **Dificultad en la detección de contornos**: Identificar y seguir los contornos de las monedas se complica cuando están solapadas. Esto puede observarse en la siguiente imagen, en la cual se ve como no se detectan todos los contornos existentes, ya que no todos conforman círculos perfectos detectables mediante la transformada de Hough.  
+
+![Monedas solapadas](README%20Images/tarea2-solapadas.jpg)
+
+Para abordar este problema, se necesitarían técnicas de procesamiento de imágenes muy avanzadas, como la segmentación de instancias o la utilización de redes neuronales profundas, que pueden identificar y separar las monedas superpuestas. Incluso con técnicas avanzadas, la tarea sigue siendo desafiante y propensa a errores, y la precisión del conteo de dinero puede verse afectada por la complejidad de la superposición de monedas en la imagen.
+
+## Tarea 3
+
+**Enlace a la tarea**: [Tarea 3](Tarea%203.ipynb).
+
+El propósito de esta última tarea consiste en crear un clasificador que permita identificar los tres tipos de **microplásticos** propuestos: los **Fragmentos**, los **Pellet** y el **Alquitrán**.
+
+Para ello, el primer paso a seguir será cargar las tres imágenes correspondientes y convertirlas a imágenes en escala de grises, tal y como se muestra a continuación:
+
+![Microplásticos Grises](README%20Images/tarea3-grises.jpg)
+
+Acto seguido, se deberán aplicar los umbrales necesarios para conseguir una buena separación y distinción de los objetos con respecto al fondo sobre el que se encuentran. Para ello, se ha establecido un umbral fijo para los Fragmentos y para los Pellet, mientras que para el Alquitrán se ha usado **OTSU**.
+
+![Microplásticos Umbralizados](README%20Images/tarea3-umbralizado.jpg)
+
+Partiendo desde este punto, se procederá a la identificación de cada uno de los contornos presentes en las tres imágenes, clasificándolos como Fragmento, Pellet o Alquitrán. 
+
+Para lograr este objetivo, se han calculado las características geométricas básicas de cada uno de los contornos, las cuales serán muy útiles a la hora de distinguir los diferentes microplásticos. Las características geométricas calculadas fueron las siguientes:
+
+- Área del contorno.
+- Perímetro.
+- Alto y ancho del mínimo contenedor que contiene al contorno.
+- Compacidad.
+- Eje mayor y menor de la elipse que contiene el contorno.
+- Relación de aspecto (ancho/alto).
+- Relación área contenedor (área/relación de aspecto).
+
+Mediante estas características geométricas, hemos sido capaces de clasificar cada uno de los contornos dentro de algunas de las clases posibles.
+
+Por ejemplo, para clasificar un contorno como Pellet, se han de cumplir las dos siguientes condiciones:
+
+- Compacidad < 15.9
+- Relación de aspecto cercana a 1
+
+La compacidad se entiende como la relación que existe entre el perímetro del contorno y el área que dicho contorno ocupa. Es decir, que si se trata de un contorno que es muy alargado (gran perímetro) pero que sin embargo abarca poco área, el valor de la compacidad de dicho contorno será alto. Lo contrario ocurre en aquellos contornos en los que el perímetro y el área están compensados (como suele ocurrir con formas circulares como los Pellet, donde la relación perímetro^2/área resulta en un valor bajo).
+
+Por otro lado, la relación de aspecto nos ayuda a deducir si un contorno es circular o no. Normalmente, los círculos tienen el mismo ancho que alto, por eso mismo, si la relación de aspecto (ancho/altura) es muy cercana a 1, se podría intuir que la forma es circular.
+
+En cuanto a la identificación de Fragmentos, hemos tenido en cuenta la relación de área con respecto al contenedor que contiene el contorno. En este caso, si el área del contenedor que contiene al contorno es muy grande (dado que el contorno interior es muy alargado por ejemplo) y el área del contorno es relativamente baja, el resultado que daría la relación *área_contorno/área_contenedor* sería muy baja. Como nos hemos dado cuenta que el valor de esta relación en los Fragmentos estaba por debajo del 0.65, hemos decidido poner la siguiente condición:
+
+- Relación área del contorno y área del contenedor < 0.65
+
+Además, hemos tenido que incluir una condición más, que permita diferenciar los Fragmentos del Alquitrán, pues hemos encontrado bastantes problemas a la hora de clasificar estos dos microplásticos. 
+
+La condición en cuestión consiste en tener en cuenta la relación entre el eje mayor de la elipse que contiene al contorno y el eje menor. Esto se debe a que, en los Fragmentos, hemos detectado que el eje mayor suele ser bastante más grande que el eje menor (debido a que son más alargados), al contrario que en el Alquitrán, donde ambos ejes tienden a ser algo más parecidos. Por eso mismo, al aplicar esta relación (eje_menor/eje_mayor), los valores que se encuentren por debajo de 0.78 deberían corresponderse con Fragmentos, y todos aquellos que estén por encima y más cercanos a 1, deberían ser Alquitrán.
+
+Todos aquellos contornos que no cumplan con las condiciones anteriores, serán clasificados como Alquitrán. En la siguiente imagen se puede observar la matriz de confusión obtenida.
+
+![Matriz de Confusión](README%20Images/tarea3-matriz.jpg)
+
+
