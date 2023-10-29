@@ -14,31 +14,47 @@ El código comienza importando las bibliotecas necesarias: cv2 para OpenCV, nump
 
 A continuación, se convierte la imagen a escala de grises para facilitar el procesamiento. Se calcula el histograma de la imagen en escala de grises con 256 bins, lo que muestra la distribución de intensidades de píxeles en la imagen. Se crea una figura con dos subparcelas para mostrar la imagen en escala de grises y su histograma.
 
+<p>&nbsp;</p>
+
 <div align="center">
     <img src="./README%20Images/tarea1-histograma.png">
 </div>
 
+<p>&nbsp;</p>
+
 Se define un umbral (umbral = 115) y se realiza una umbralización binaria invertida en la imagen en escala de grises. Esto se hace para resaltar las monedas y otros objetos en la imagen. Se muestran la imagen original y la imagen umbralizada (invertida) en dos subparcelas.
+
+<p>&nbsp;</p>
 
 <div align="center">
     <img src="./README%20Images/tarea1-invertida.png">
 </div>
 
+<p>&nbsp;</p>
+
 Luego, se utilizan las funciones de OpenCV cv2.findContours para encontrar todos los contornos en la imagen umbralizada. Se utiliza nuevamente la función cv2.findContours con cv2.RETR_EXTERNAL para encontrar solo los contornos externos en la imagen. Los contornos externos se dibujan en la imagen original en verde.
 
 Se inicia un contador para realizar un seguimiento del número de monedas. Se recorren los contornos externos y se verifica si se asemejan a un círculo. Si el contorno se asemeja a un círculo, se incrementa el contador de monedas. Se imprime en la consola el número total de monedas detectadas en la imagen original. Se muestra una imagen en la que los contornos externos se han rellenado.
+
+<p>&nbsp;</p>
 
 <div align="center">
     <img src="./README%20Images/tarea1-bordes1.png">
 </div>
 
+<p>&nbsp;</p>
+
 Posteriormente, se carga otra imagen de monedas desde un archivo llamado 'monedas-objetos-2.jpg' y se muestra en una ventana. La segunda imagen se convierte a escala de grises y se suavizan las altas frecuencias. Se utiliza la función cv2.HoughCircles para detectar círculos en la imagen procesada. Se imprime en la consola el número total de monedas detectadas en la segunda imagen.
 
 Finalmente, se dibujan los círculos detectados en la imagen original y en una imagen negra, y se muestran ambas imágenes en una ventana.
 
+<p>&nbsp;</p>
+
 <div align="center">
     <img src="./README%20Images/tarea1-bordes2.png">
 </div>
+
+<p>&nbsp;</p>
 
 ## Tarea 2
 
@@ -46,25 +62,35 @@ Finalmente, se dibujan los círculos detectados en la imagen original y en una i
 
 Para la realización de esta tarea partiremos de la solución obtenida en la tarea anterior. El objetivo ahora, será contar el total de dinero que se visualiza en la imagen. En este caso, hemos decidido escoger una nueva imagen en la cual solo hayan monedas, y que, además, tenga varias repetidas con la finalidad de comprobar el correcto funcionamiento del programa para contar el dinero total. La imagen de la cual haremos uso será la siguiente:
 
+<p>&nbsp;</p>
+
 <div align="center">
     <img src="./Images/monedas-personal-1.jpg">
 </div>
+
+<p>&nbsp;</p>
 
 Acto seguido, se deberá aplicar un umbralizado a la imagen lo más preciso posible para conseguir que los contornos de las monedas sean fieles a los de la imagen original. Todos estos pasos son exactamente los mismos que fueron llevados a cabo en la tarea anterior.
 
 Tras seleccionar el umbral idóneo, y aplicar las operaciones correspondientes para extraer los contornos de las monedas de la imagen umbralizada, se obtendrá el siguiente resultado: 
 
+<p>&nbsp;</p>
 <div align="center">
     <img src="./README%20Images/tarea2-contornos.jpg">
 </div>
+
+<p>&nbsp;</p>
 
 Esta imagen será clave a la hora de contabilizar el dinero total que aparece en la imagen, pues si hemos aplicado un buen umbralizado y una buena extracción de contornos, las proporciones entre monedas serán fieles a la realidad y se podrán distinguir unas de otras.
 
 A continuación, definimos dos diccionarios. En el primero, se establece para cada clave (nombres de las monedas: 1cts, 2cts...) la proporción que presentan con respecto a la moneda de 1 euro. De esta manera, una vez se haya obtenido el diámetro de la moneda de 1 euro en la imagen, se podrá obtener el diámetro del resto de monedas de forma proporcional. El segundo diccionario simplemente asocia cada clave (nombres de las monedas) a el valor de las mismas (0.01, 0.50...).
 
+<p>&nbsp;</p>
 <div align="center">
     <img src="./README%20Images/tarea2-diccionarios.jpg">
 </div>
+
+<p>&nbsp;</p>
 
 Como es obvio, el siguiente paso será obtener el diámetro real de la moneda de 1 euro que aparece en la imagen. Para ello, aparecerá una ventana emergente en la que se nos permitirá seleccionar dicha moneda. La forma en la que funciona la selección de la moneda y la obtención del diámetro es sencilla:
 
@@ -82,9 +108,13 @@ Además de mostrar el dinero total que aparece en la imagen, hemos querido mostr
 
 **Dinero Total = 5.08 €**
 
+<p>&nbsp;</p>
+
 <div align="center">
-    <img src="./README%20Images/tarea2-dinero.jpg)">
+    <img src="./README%20Images/tarea2-dinero.jpg">
 </div>
+
+<p>&nbsp;</p>
 
 Por otra parte, tratamos de realizar el conteo de dinero presente en la imagen con monedas solapadas, lo cual supuso un gran problema por los siguientes motivos:
 
@@ -94,9 +124,13 @@ Por otra parte, tratamos de realizar el conteo de dinero presente en la imagen c
 
 - **Dificultad en la detección de contornos**: Identificar y seguir los contornos de las monedas se complica cuando están solapadas. Esto puede observarse en la siguiente imagen, en la cual se ve como no se detectan todos los contornos existentes, ya que no todos conforman círculos perfectos detectables mediante la transformada de Hough.  
 
+<p>&nbsp;</p>
+
 <div align="center">
-    <img src="./README%20Images/tarea2-solapadas.jpg)">
+    <img src="./README%20Images/tarea2-solapadas.jpg">
 </div>
+
+<p>&nbsp;</p>
 
 Para abordar este problema, se necesitarían técnicas de procesamiento de imágenes muy avanzadas, como la segmentación de instancias o la utilización de redes neuronales profundas, que pueden identificar y separar las monedas superpuestas. Incluso con técnicas avanzadas, la tarea sigue siendo desafiante y propensa a errores, y la precisión del conteo de dinero puede verse afectada por la complejidad de la superposición de monedas en la imagen.
 
@@ -108,15 +142,23 @@ El propósito de esta última tarea consiste en crear un clasificador que permit
 
 Para ello, el primer paso a seguir será cargar las tres imágenes correspondientes y convertirlas a imágenes en escala de grises, tal y como se muestra a continuación:
 
+<p>&nbsp;</p>
+
 <div align="center">
-    <img src="./README%20Images/tarea3-grises.jpg)">
+    <img src="./README%20Images/tarea3-grises.jpg">
 </div>
+
+<p>&nbsp;</p>
 
 Acto seguido, se deberán aplicar los umbrales necesarios para conseguir una buena separación y distinción de los objetos con respecto al fondo sobre el que se encuentran. Para ello, se ha establecido un umbral fijo para los Fragmentos y para los Pellet, mientras que para el Alquitrán se ha usado **OTSU**.
 
+<p>&nbsp;</p>
+
 <div align="center">
-    <img src="./README%20Images/tarea3-umbralizado.jpg)">
+    <img src="./README%20Images/tarea3-umbralizado.jpg">
 </div>
+
+<p>&nbsp;</p>
 
 Partiendo desde este punto, se procederá a la identificación de cada uno de los contornos presentes en las tres imágenes, clasificándolos como Fragmento, Pellet o Alquitrán. 
 
@@ -151,8 +193,11 @@ La condición en cuestión consiste en tener en cuenta la relación entre el eje
 
 Todos aquellos contornos que no cumplan con las condiciones anteriores, serán clasificados como Alquitrán. En la siguiente imagen se puede observar la matriz de confusión obtenida.
 
+<p>&nbsp;</p>
+
 <div align="center">
-    <img src="./README%20Images/tarea3-matriz.jpg)">
+    <img src="./README%20Images/tarea3-matriz.jpg">
 </div>
 
+<p>&nbsp;</p>
 
