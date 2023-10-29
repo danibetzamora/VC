@@ -33,7 +33,7 @@ Resultado
 <p>&nbsp;</p>
 
 <div align="center">
-    <img src="./README%20Images/filtro2.jpg">
+    <img src="./README%20Images/filtro2.png">
 </div>
 
 <p>&nbsp;</p>
