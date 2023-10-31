@@ -70,3 +70,23 @@ En la siguiente imagen se muestra el resultado del filtro aplicado:
 </div>
 
 <p>&nbsp;</p>
+
+## Filtro 4
+
+**Enlace al cuarto filtro**: [Filtro 4](Filtro%204.ipynb).
+
+En este cuarto y último filtro intercambiamos las caras de dos personas. Obtenemos las dimesiones de ambas caras, alto y ancho, al igual que las que compara son las dos caras más cercanas.
+
+Posteriormente igualamos los puntos de la primera cara a la segunda cara marcando en todo momento con un rectangulo verde el marco original de cada una de las caras. Estas se irán reescalando a medida que vayan cambiando los puntos. Para verificar lo que se va detectando, se muestra por consola los mensajes de "error" para que se pueda ejecutar correctamente el código.
+
+Se muestra en la siguiente imágen a dos personas, siendo una de ellas un modelo de andar por casa:
+
+
+<p>&nbsp;</p>
+
+
+<div align="center">
+    <img src="./README%20Images/filtro4.jpg">
+</div>
+
+<p>&nbsp;</p>
