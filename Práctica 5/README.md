@@ -67,3 +67,63 @@ Ya solo quedaría aplicar un OCR a la región de la matrícula obtenida y mostra
 	text = pytesseract.image_to_string(plate, config='--psm 8', output_type=Output.STRING)
 
 Nosotros además, hemos declarado un método el cual permite corregir el formato de texto devuelto por pytesseract, pues hay veces en las que el resultado del texto de la matrícula tiene ruido por delante o por detrás, así que básicamente tratamos de controlar que el formato del texto resultante sea el de una matrícula española: "*0000 AAA*".
+
+## Detector 2
+
+**Enlace al segundo detector**: [Detector 2](Detector%202.ipynb).
+
+Para este segundo detector, el procedimiento es diferente al anterior, pues en lugar de procesar e identificar las matrículas de forma "manual", el objetivo es entrenar nuestro propio detector basado en YOLOv8.
+
+Por eso mismo, el primer paso a tener en cuenta para comenzar con el entrenamiento es la anotación de imágenes. En nuestro caso, hemos hecho uso de un *dataset* procedente de la web de **Roboflow**, en el cual se proporcionan 200 imágenes de matrículas ya etiquetadas, lo cual nos simplificó el trabajo, pues el *dataset* ya contaba con las tres carpetas necesarias para el entrenamiento (*train*, *validation* y *test*), por lo que solo quedaba exportar dicho *dataset* en formato YOLOv8.
+
+- **Enlace al _dataset_ usado**: [Roboflow Dataset](https://universe.roboflow.com/itrc/plate-detection-y5).
+
+Una vez recopiladas las imágenes y las anotaciones, y habiendo estructurado el directorio de carpetas de la forma correcta, tuvimos que redactar nuestro archivo *.yaml*, el cual sería usado junto con el modelo de YOLOv8 para entrenar nuestro detector. El archivo *.yaml* en cuestión nos quedó de la siguiente manera:
+
+```yaml
+# PLATES DETECTION
+train: C:/Users/Usuario/Documents/VC/FinalTrain/dataset/train/
+val: C:/Users/Usuario/Documents/VC/FinalTrain/dataset/val/  
+test: C:/Users/Usuario/Documents/VC/FinalTrain/dataset/test/  
+
+# number of classes
+nc: 1
+
+# class names
+names: [ 'plate' ]
+```
+
+Por lo que, teniendo la estructura de carpetas con imágenes etiquetadas en formato YOLOv8, el fichero *.yaml*, y el modelo *yolov8n.pt*, ya estábamos preparados para empezar el entrenamiento ejecutando el siguiente comando:
+
+	yolo detect train model=yolov8n.pt data=plates.yaml imgsz=640 batch=4 device=CPU epochs=40
+
+En la siguiente imagen podemos comprobar como, efectivamente, conseguimos terminar el entrenamiento correctamente. Además, también se muestra una imagen correspondiente a las gráficas resultantes del entrenamiento la cual es proporcionada por YOLO, y en la que se puede ver como el entrenamiento se ejecutó de forma satisfactoria, reduciendo la función de pérdida y aumentando la precisión de acierto en cada época.
+
+<p>&nbsp;</p>
+
+<div align="center">
+    <img src="./README%20Images/entreno.jpg">
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div align="center">
+    <img src="./README%20Images/results.png">
+</div>
+
+<p>&nbsp;</p>
+
+Partiendo de este punto, ya solo queda hacer uso del modelo resultante del entrenamiento [plates_model.pt](Models/plates_model.pt) en nuestro código inicial. 
+
+En el [detector 2](Detector%202.ipynb) básicamente lo que hacemos es aplicar el nuevo modelo de detección de matrículas, y una vez obtenido el *box* que contiene la matrícula y sus respectivos parámetros y coordenadas, ya podemos extraer la imagen de la matrícula de la imagen original y aplicarle OCR con **pytesseract**. En la siguiente imagen se puede ver el resultado obtenido con nuestro propio modelo:
+
+
+<p>&nbsp;</p>
+
+<div align="center">
+    <img src="./README%20Images/plate2.png">
+</div>
+
+<p>&nbsp;</p>
