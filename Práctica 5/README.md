@@ -50,7 +50,9 @@ El procesamiento de imagen llevado a cabo para detectar y extraer zonas rectangu
 		perimeter = cv2.arcLength(contour, True)
 		edges_count = cv2.approxPolyDP(contour, 0.02 * perimeter, True)
 
-5. En caso de que el contorno tenga 4 vértices, se obtendrán las coordenadas *x* e *y*, y el ancho y el alto del rectángulo que encierra a dicho contorno. De esta manera, ya tendremos la coordenada donde está situada la matrícula, y el ancho y el alto del contenedor que la contiene. Ya solo quedaría guardar en una nueva variable la imagen de la matrícula, extrayéndola de la imagen original haciendo uso de las coordenadas que obtuvimos, lo cual nos permite ver la matrícula extraída de la siguiente manera:
+5. En caso de que el contorno tenga 4 vértices, se obtendrán las coordenadas *x* e *y*, y el ancho y el alto del rectángulo que encierra a dicho contorno. De esta manera, ya tendremos la coordenada donde está situada la matrícula, y el ancho y el alto del contenedor que la contiene. Ya solo quedaría guardar en una nueva variable la imagen de la matrícula, extrayéndola de la imagen original haciendo uso de las coordenadas que obtuvimos.
+
+Una vez finalizado el procesamiento de la imagen para detectar la matrícula, podremos visualizar el resultado:
 
 <p>&nbsp;</p>
 
