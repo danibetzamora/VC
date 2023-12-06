@@ -14,6 +14,30 @@ Mientras que, **DeepFace**, es un sistema de reconocimiento facial impulsado por
 
 **Enlace a la primera propuesta**: [Identificador Facial](IdentificadorFacial.ipynb).
 
+Este programa utiliza la biblioteca OpenCV y la librería scikit-learn en Python para implementar un sistema de reconocimiento facial en tiempo real. La aplicación consta de tres partes principales: la captura de imágenes para la creación de un conjunto de datos de entrenamiento, el entrenamiento de un modelo de máquina de soporte vectorial (SVM) utilizando Análisis de Componentes Principales (PCA) para la reducción de dimensionalidad y, finalmente, el reconocimiento facial en tiempo real utilizando la cámara web.
+
+Primero, se capturan imágenes de una persona específica utilizando la función *capturar_imagen()*. Este proceso se repite hasta que se adquieren 100 imágenes de la persona deseada, las cuales se almacenan en un directorio específico dentro de 'DATASET_FOTOS_PERSONAS_P6'.
+
+Luego, el programa utiliza las imágenes capturadas para entrenar un modelo SVM en la función entrenar_modelo(). Se preprocesan las imágenes, se realiza la reducción de dimensionalidad mediante PCA, y se entrena un clasificador SVM con kernel RBF (Radial Basis Function). La precisión del modelo se imprime en la consola.
+
+Finalmente, se utiliza el modelo entrenado para realizar el reconocimiento facial en tiempo real con la función reconocimiento_en_tiempo_real(). La cámara web captura frames, detecta caras utilizando un clasificador en cascada Haar, y aplica el modelo SVM para predecir la identidad de la persona en cada cuadro. El resultado se muestra en la ventana de video en tiempo real, junto con un cuadro delimitador y el nombre de la persona reconocida.
+
+<p>&nbsp;</p>
+
+<div align="center">
+    <img src="./README%20Images/captura.jpg">
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div align="center">
+    <img src="./README%20Images/identificacion.jpg">
+</div>
+
+<p>&nbsp;</p>
+
 ## Propuesta 2
 
 **Enlace a la segunda propuesta**: [Juego de Expresiones con DeepFace](JuegoDeepFace.ipynb).
